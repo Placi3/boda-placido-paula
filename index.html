@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plácido & Paula — ¡Nos casamos!</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* CONFIGURACIÓN DE COLORES Y VARIABLES PREMIUM */
+        :root {
+            --bg-claro: #FAF7F2;       /* Mezcla intermedia: entre blanco puro y arena (no tan beige) */
+            --bg-arena: #F5F0E6;       /* Fondo arena suave original para contrastes */
+            --bg-tarjeta: #FFFFFF;     /* Blanco puro para elementos destacados (tarjetas/formularios) */
+            --texto-principal: #2C2C2C;/* Gris carbón elegante */
+            --texto-secundario: #6E6E6E;/* Gris atenuado para subtítulos */
+            --color-acento: #6E7E6A;   /* Verde salvia mate (estética botánica/minimalista) */
+            --color-borde: #E2DBD0;    /* Líneas divisorias sutiles */
+        }
+
+        /* RESETEO GENERAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-claro);
+            color: var(--texto-principal);
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* TIPOGRAFÍAS */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+
+        p {
+            font-size: 10.5pt;
+            font-weight: 300;
+            color: var(--texto-principal);
+        }
+
+        /* SECCIÓN PORTADA (HERO) - ESTILO WEBFLOW FULLSCREEN */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-arena); /* Aquí podrás enlazar vuestra foto de fondo */
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5.5rem;
+            margin-bottom: 5px;
+            font-weight: 400;
+            color: var(--texto-principal);
+        }
+
+        .hero p.subtitulo {
+            font-size: 1rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: var(--color-acento);
+            margin-bottom: 20px;
+        }
+
+        .hero p.fecha {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: var(--texto-principal);
+        }
+
+        /* NUEVO BOTÓN FLOTANTE ANIMADO */
+        .flotante-wrapper {
+            margin-top: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .btn-hero-flotante {
+            display: inline-block;
+            padding: 16px 35px;
+            background-color: var(--color-acento);
+            color: #FFFFFF;
+            border: 1px solid var(--color-acento);
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.80rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .btn-hero-flotante:hover {
+            box-shadow: 0 10px 25px rgba(110, 126, 106, 0.4);
+            transform: scale(1.05);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* DISEÑO DE SECCIONES GENERALES */
+        section {
+            padding: 100px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .seccion-alterna {
+            background-color: var(--bg-arena);
+            max-width: 100%;
+        }
+
+        .seccion-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 0px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: var(--color-acento);
+            margin: 15px auto 0 auto;
+        }
+
+        .intro-text {
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+            font-size: 11pt;
+            color: var(--texto-secundario);
+        }
+
+        /* CUENTA ATRÁS MINIMALISTA */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+
+        .countdown-item b {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--color-acento);
+            line-height: 1;
+        }
+
+        .countdown-item span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--texto-secundario);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* CRONOGRAMA DE LA BODA (TIMELINE VERTIACAL) */
+        .timeline {
+            position: relative;
+            max-width: 650px;
+            margin: 50px auto 0 auto;
+            padding: 20px 0;
+            text-align: left;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: var(--color-borde);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 50px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 10px;
+            top: 6px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: var(--color-acento);
+            border: 2px solid var(--bg-claro);
+            z-index: 2;
+        }
+
+        .seccion-alterna .timeline-dot {
+            border-color: var(--bg-arena);
+        }
+
+        .timeline-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--color-acento);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--texto-principal);
+        }
+
+        /* GALERÍA DE IMÁGENES FINCA */
+        .galeria-imagenes {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: -20px auto 40px auto; /* Ajuste para equilibrar el espacio con el intro-text superior */
+            max-width: 100%;
+        }
+
+        .img-finca {
+            width: 33.33%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* BLOQUES DE INFORMACIÓN ÚTIL (TARJETAS) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background-color: var(--bg-tarjeta);
+            padding: 40px 30px;
+            border-radius: 4px;
+            border: 1px solid var(--color-borde);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .info-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--texto-principal);
+        }
+
+        /* BOTONES INTERACTIVOS */
+        .btn-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 24px;
+            border: 1px solid var(--texto-principal);
+            color: var(--texto-principal);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: transparent;
+            cursor: pointer;
+            align-self: center;
+        }
+
+        .btn-link:hover {
+            background-color: var(--texto-principal);
+            color: #FFFFFF;
+        }
+
+        /* PORTA-PAPELES / AREA DE REGALOS */
+        .iban-container {
+            margin-top: 15px;
+            background: var(--bg-arena);
+            padding: 12px;
+            font-family: 'Montserrat', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-copy {
+            background: none;
+            border: none;
+            color: var(--color-acento);
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* DISEÑO MODERNO DEL FORMULARIO RSVP */
+        .rsvp-box {
+            background-color: var(--bg-tarjeta);
+            padding: 60px 50px;
+            border-radius: 4px;
+            border: 1px solid var(--color-borde);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.02);
+            max-width: 650px;
+            margin: 40px auto 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--texto-principal);
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--color-borde);
+            background-color: var(--bg-claro);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--texto-principal);
+            border-radius: 2px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-acento);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--color-acento);
+            color: #FFFFFF;
+            border: none;
+            padding: 16px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #586754;
+            transform: translateY(-2px);
+        }
+
+        /* PIE DE PÁGINA */
+        footer {
+            padding: 60px 24px;
+            background-color: var(--bg-arena);
+            text-align: center;
+            border-top: 1px solid var(--color-borde);
+        }
+
+        footer h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* ANIMACIÓN AL HACER SCROLL (FADE-IN) */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE (PANTALLAS MÓVILES) */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 4rem; }
+            .hero p.fecha { font-size: 2.2rem; }
+            section { padding: 70px 20px; }
+            section h2 { font-size: 1.8rem; }
+            .countdown-container { gap: 15px; }
+            .countdown-item b { font-size: 2.2rem; }
+            .rsvp-box { padding: 40px 20px; }
+            .info-grid { grid-template-columns: 1fr; }
+            
+            /* Ajuste de galería para móviles */
+            .galeria-imagenes {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .img-finca {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content fade-in">
+            <h1>Plácido & Paula</h1>
+            <p class="subtitulo">Nos Casamos</p>
+            <p class="fecha">19 . Junio . 2027</p>
+            
+            <div class="flotante-wrapper">
+                <a href="#formulario" class="btn-hero-flotante">Confirma tu asistencia</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="fade-in">
+        <h2><strong>Comienza la aventura</strong></h2>
+        <p class="intro-text">El tiempo vuela y nosotros ya estamos contando los minutos para celebrar con vosotros nuestro día.</p>
+        <div class="countdown-container" id="reloj">
+            <div class="countdown-item"><b id="dias">00</b><span>Días</span></div>
+            <div class="countdown-item"><b id="horas">00</b><span>Horas</span></div>
+            <div class="countdown-item"><b id="min">00</b><span>Minutos</span></div>
+            <div class="countdown-item"><b id="seg">00</b><span>Segundos</span></div>
+        </div>
+    </section>
+
+    <div class="seccion-alterna">
+        <section class="seccion-inner fade-in">
+            <h2><strong>El Plan del Día</strong></h2>
+            <p class="intro-text">Para que no os perdáis ningún momento clave de nuestra celebración. ¡No lleguéis tarde!</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">13:00 h</div>
+                    <h3>La Ceremonia</h3>
+                    <p>Nos daremos el "Sí, quiero" oficial rodeados de todos vosotros en Finca El Jardín.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">14:30 h</div>
+                    <h3>Cóctel de Bienvenida</h3>
+                    <p>Un primer encuentro para brindar, disfrutar de los aperitivos y empezar a calentar motores.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">16:00 h</div>
+                    <h3>El Banquete</h3>
+                    <p>Nos sentaremos a disfrutar de una gran comida, sorpresas y, por supuesto, buena compañía.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">19:00 h</div>
+                    <h3>Bingo Musical y Fiesta</h3>
+                    <p>Afinad el oído y preparad vuestros cartones porque llega el gran Bingo Musical. Justo después, abrimos barra libre y pista de baile.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="fade-in">
+        <h2><strong>Ubicación</strong></h2>
+        <p class="intro-text">La celebración completa tendrá lugar en un enclave idílico pensado para disfrutar al máximo.</p>
+        
+        <div class="galeria-imagenes">
+            <img src="1.jfif" alt="Finca El Jardín - Exterior izquierdo" class="img-finca">
+            <img src="3.jpg" alt="Finca El Jardín - Vista central" class="img-finca">
+            <img src="2.jfif" alt="Finca El Jardín - Exterior derecho" class="img-finca">
+        </div>
+
+        <p style="font-weight: 500; margin-bottom: 10px;">Finca El Jardín</p>
+        <p style="color: var(--texto-secundario); margin-bottom: 30px;">Cartagena, Región de Murcia</p>
+        
+        <div style="width: 100%; border: 1px solid var(--color-borde); overflow: hidden; height: 350px;">
+            <iframe 
+                src="https://maps.google.com/maps?q=Finca%20El%20Jard%C3%ADn,%20Cartagena,%20Espa%C3%B1a&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Finca+El+Jardín,+Cartagena,+España" target="_blank" class="btn-link">Cómo llegar con GPS</a>
+    </section>
+
+    <div class="seccion-alterna">
+        <section class="seccion-inner fade-in">
+            <h2><strong>Información Útil</strong></h2>
+            <p class="intro-text">Vuestra comodidad es lo primero. Aquí tenéis algunos datos importantes para el gran día.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div>
+                        <h3>Código de vestimenta</h3>
+                        <p>Vuestras mejores galas, pero recordad traer calzado cómodo para darlo todo en la pista. Para militares: Especial relevancia y sable. Traeros otro traje para cambiaros y darlo todo en la fiesta.</p>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <div>
+                        <h3>Vuestra Presencia</h3>
+                        <p>El mejor regalo es compartir este día con vosotros. Si aun así deseáis tener un detalle para ayudarnos a comenzar esta nueva etapa, podéis hacerlo aquí:</p>
+                        <div class="iban-container">
+                            <span id="ibanText">ES21 0000 0000 0000 0000 0000</span>
+                            <button class="btn-copy" onclick="copiarIban()">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div>
+                        <h3>¿Dónde dormir?</h3>
+                        <p>Sabemos que muchos venís de fuera. Hemos preparado una pequeña selección de hoteles recomendados en Cartagena para vosotros.</p>
+                    </div>
+                    <a href="#hoteles" class="btn-link" style="padding: 6px 15px; font-size: 0.65rem;">Ver Opciones</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="hoteles" class="fade-in">
+        <h2><strong>Alojamientos Recomendados</strong></h2>
+        <p class="intro-text">Hemos seleccionado estas opciones en Cartagena por su excelente ubicación y buena relación calidad-precio.</p>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div>
+                    <h3>B&B Hotel Cartagena Cartagonova</h3>
+                    <p>Una opción moderna y muy económica en pleno centro. Perfecta para descansar tras la fiesta sin gastar de más.</p>
+                </div>
+                <a href="https://www.hotelbb.com" target="_blank" class="btn-link" style="padding: 6px 15px; font-size: 0.65rem;">Ver Hotel</a>
+            </div>
+            
+            <div class="info-card">
+                <div>
+                    <h3>Hotel Los Habaneros</h3>
+                    <p>Un clásico frente a la muralla, con excelente servicio y muy bien conectado con el centro.</p>
+                </div>
+                <a href="https://www.hotelloshabaneros.com" target="_blank" class="btn-link" style="padding: 6px 15px; font-size: 0.65rem;">Ver Hotel</a>
+            </div>
+            
+            <div class="info-card">
+                <div>
+                    <h3>Sercotel Carlos III</h3>
+                    <p>Habitaciones muy cómodas, ubicación estupenda y un precio intermedio ideal para pasar el fin de semana.</p>
+                </div>
+                <a href="https://www.sercotelhoteles.com" target="_blank" class="btn-link" style="padding: 6px 15px; font-size: 0.65rem;">Ver Hotel</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="seccion-alterna">
+        <section id="formulario" class="seccion-inner fade-in">
+            <h2><strong>Confirmación de Asistencia</strong></h2>
+            <p class="intro-text">Agradecemos que nos indiques tu respuesta antes del 1 de marzo de 2027 para ayudarnos con la organización de los detalles finales.</p>
+            
+            <div class="rsvp-box">
+                <form action="https://formspree.io/f/mzdlpqbw" method="POST" id="rsvpForm">
+                    
+                    <div class="form-group">
+                        <label for="asistencia">¿Nos acompañas?</label>
+                        <select id="asistencia" name="Asistencia" required onchange="toggleFormFields()">
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="Confirma">Sí, ¡allí estaré!</option>
+                            <option value="Declina">Lo siento, no podré asistir</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="div-nombre-gral" style="display: none;">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" name="Nombre" placeholder="Introduce tu nombre y apellidos">
+                    </div>
+
+                    <div class="form-group" id="div-cuantos" style="display: none;">
+                        <label for="cuantos">¿Cuántos sois?</label>
+                        <select id="cuantos" name="Cantidad de personas" onchange="generateNameFields()">
+                            <option value="" disabled selected>Selecciona el número de personas</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+
+                    <div id="nombres-dinamicos" style="display: none;"></div>
+
+                    <div id="div-extra" style="display: none;">
+                        <div class="form-group">
+                            <label for="restricciones">Alergias o Intolerancias Alimentarias</label>
+                            <textarea id="restricciones" name="Restricciones Alergias" rows="3" placeholder="Ej: Celíaco, Vegano, Intolerante a la lactosa... (Si no tienes, déjalo en blanco)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cancion">¿Qué canción no puede faltar en la fiesta?</label>
+                            <input type="text" id="cancion" name="Cancion sugerida" placeholder="Título y Artista">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar Respuesta</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <h3 style="font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;">¡Os esperamos!</h3>
+        <p style="color: var(--texto-secundario); font-size: 0.8rem; letter-spacing: 1px; margin-top: 10px;">Plácido & Paula — 19 Junio 2027</p>
+    </footer>
+
+    <script>
+        // 0. FORZAR INICIO ARRIBA DEL TODO AL RECARGAR
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
+        // 1. CUENTA ATRÁS DINÁMICA
+        const fechaBoda = new Date(2027, 5, 19, 13, 0, 0).getTime();
+
+        const x = setInterval(function() {
+            const ahora = new Date().getTime();
+            const diferencia = fechaBoda - ahora;
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById("dias").innerText = dias < 10 ? "0" + dias : dias;
+            document.getElementById("horas").innerText = horas < 10 ? "0" + horas : horas;
+            document.getElementById("min").innerText = minutos < 10 ? "0" + minutos : minutos;
+            document.getElementById("seg").innerText = segundos < 10 ? "0" + segundos : segundos;
+
+            if (diferencia < 0) {
+                clearInterval(x);
+                document.getElementById("reloj").innerHTML = "<p style='font-family:\"Playfair Display\", serif; font-size:1.8rem; color:var(--color-acento);'>¡Llegó nuestro gran día!</p>";
+            }
+        }, 1000);
+
+        // 2. FUNCIÓN COPIAR AL PORTAPAPELES (IBAN)
+        function copiarIban() {
+            const textToCopy = document.getElementById("ibanText").innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const btn = document.querySelector(".btn-copy");
+                btn.innerText = "¡Copiado!";
+                btn.style.color = "var(--texto-principal)";
+                setTimeout(() => {
+                    btn.innerText = "Copiar";
+                    btn.style.color = "var(--color-acento)";
+                }, 2000);
+            }).catch(err => {
+                console.error('Error al copiar el código: ', err);
+            });
+        }
+
+        // 3. ANIMACIÓN CONTROLADA DE APARICIÓN (FADE IN AL HACER SCROLL)
+        const observerOptions = {
+            root: null,
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // 4. LÓGICA DEL FORMULARIO DINÁMICO
+        function toggleFormFields() {
+            const asistencia = document.getElementById('asistencia').value;
+            const divNombreGral = document.getElementById('div-nombre-gral');
+            const inputNombreGral = document.getElementById('nombre');
+            const divCuantos = document.getElementById('div-cuantos');
+            const selectCuantos = document.getElementById('cuantos');
+            const divExtra = document.getElementById('div-extra');
+            const divNombresDinamicos = document.getElementById('nombres-dinamicos');
+
+            if (asistencia === "Confirma" || asistencia === "Declina") {
+                // Ocultar nombre general para usar siempre los campos dinámicos de nombres
+                divNombreGral.style.display = 'none';
+                inputNombreGral.disabled = true;
+                inputNombreGral.required = false;
+
+                // Mostrar cuántos y habilitar la caja de nombres dinámicos
+                divCuantos.style.display = 'block';
+                selectCuantos.disabled = false;
+                selectCuantos.required = true;
+
+                divNombresDinamicos.style.display = 'block';
+                const dynamicInputs = divNombresDinamicos.querySelectorAll('input');
+                dynamicInputs.forEach(input => input.disabled = false);
+
+                // El bloque de alergias y canciones solo es relevante si van a venir
+                if (asistencia === "Confirma") {
+                    divExtra.style.display = 'block';
+                    document.getElementById('restricciones').disabled = false;
+                    document.getElementById('cancion').disabled = false;
+                } else {
+                    divExtra.style.display = 'none';
+                    document.getElementById('restricciones').disabled = true;
+                    document.getElementById('cancion').disabled = true;
+                }
+
+            } else {
+                // Estado inicial por defecto
+                divNombreGral.style.display = 'none'; // oculto por defecto ahora
+                inputNombreGral.disabled = true;
+                inputNombreGral.required = false;
+
+                divCuantos.style.display = 'none';
+                selectCuantos.disabled = true;
+                selectCuantos.required = false;
+
+                divNombresDinamicos.style.display = 'none';
+                divExtra.style.display = 'none';
+                document.getElementById('restricciones').disabled = true;
+                document.getElementById('cancion').disabled = true;
+            }
+        }
+
+        function generateNameFields() {
+            const num = document.getElementById('cuantos').value;
+            const container = document.getElementById('nombres-dinamicos');
+            container.innerHTML = ''; // Limpiar campos previos
+
+            if (!num) return;
+
+            for (let i = 1; i <= num; i++) {
+                const div = document.createElement('div');
+                div.className = 'form-group';
+                div.innerHTML = `
+                    <label for="nombre_${i}">Nombre Completo ${i}</label>
+                    <input type="text" id="nombre_${i}" name="Nombre_Completo_${i}" required placeholder="Nombre y apellidos de la persona ${i}">
+                `;
+                container.appendChild(div);
+            }
+        }
+        
+        // Ejecución al cargar la página
+        window.addEventListener('load', () => {
+            // Mostrar los bloques del hero
+            document.querySelectorAll('.hero .fade-in').forEach(el => el.classList.add('visible'));
+            
+            // Inicializar el estado correcto del formulario
+            toggleFormFields();
+        });
+    </script>
+</body>
+</html>
